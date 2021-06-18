@@ -1,0 +1,34 @@
+import { useMutation, useQuery } from '@apollo/client';
+// import LIST_HIDDEN_QUERY from '../graphql/queries/ListHidden.query';
+import {
+  LIST_HIDDEN_QUERY,
+  ListHiddenData,
+} from '../graphql/queries/list-hidden.query';
+import {
+  TOGGLE_LIST_HIDDEN,
+  ToggleListHiddenData,
+} from '../graphql/mutations/toggle-list-hidden.mutation';
+import { NextPage } from 'next';
+
+interface ToggleButtonProps {}
+
+const ToggleButton: NextPage<ToggleButtonProps> = () => {
+  const {
+    data: { listHidden },
+  } = useQuery<ListHiddenData>(LIST_HIDDEN_QUERY);
+  const [toggleListHidden] = useMutation<ToggleListHiddenData>(
+    TOGGLE_LIST_HIDDEN
+  );
+
+  return (
+    <button
+      onClick={() => {
+        toggleListHidden();
+      }}
+    >
+      {listHidden ? 'Show' : 'Hide'}
+    </button>
+  );
+};
+
+export default ToggleButton;
