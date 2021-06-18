@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql, useMutation } from '@apollo/client';
 import { Post } from '../../types';
 
 export const UPDATE_POST = gql`
@@ -10,8 +10,12 @@ export const UPDATE_POST = gql`
         description
       }
     }
+    uploadFiles(files: $files) {
+
+    }
   }
 `;
+
 
 export interface UpdatePostData {
   post: Post;

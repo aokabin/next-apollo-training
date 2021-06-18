@@ -36,6 +36,7 @@ const EditPostItem: NextPage<EditPostItemProps> = ({ id }) => {
   ) => {
     setMessage('');
     const { name, value } = e.target;
+    // TODO: 画像をstateにsetできるのか？
     setPost({
       ...post,
       [name]: value,
@@ -44,6 +45,7 @@ const EditPostItem: NextPage<EditPostItemProps> = ({ id }) => {
 
   const handleSave = async () => {
     await updatePost({
+      // NOTE: file突っ込めるのか？２つのmutationに分けるべきなのか?
       variables: {
         post: {
           id: parseInt(post.id),
@@ -61,6 +63,7 @@ const EditPostItem: NextPage<EditPostItemProps> = ({ id }) => {
   return (
     <div>
       <div>
+         
         <button onClick={handleSave}>Save</button>
         {message ? <span className="message">{message}</span> : null}
       </div>
@@ -75,6 +78,7 @@ const EditPostItem: NextPage<EditPostItemProps> = ({ id }) => {
           onChange={handleChange}
         />
       </span>
+      <span><input type="file" multiple required /></span>
       <style jsx>
         {`
           input,
